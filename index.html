@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Bot Status</title>
+  <title>Статус Бота</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
@@ -15,7 +15,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-image: url('static.gif'); /* opcional: fundo com estática */
+      background-image: url('static.gif');
       background-size: cover;
     }
 
@@ -61,7 +61,7 @@
         document.getElementById('memoria').innerText = data.memory;
         document.getElementById('regiao').innerText = data.region;
       } catch (err) {
-        console.error('Erro ao carregar status do bot:', err);
+        console.error('Ошибка при загрузке статуса бота:', err);
       }
     }
 
@@ -72,26 +72,26 @@
 <body>
 
   <div class="card">
-    <div class="title">HAYAKI BOT STATUS</div>
+    <div class="title">СТАТУС БОТА HAYAKI</div>
 
     <div class="info-box">
-      <span class="label">Status:</span> <span id="status">Carregando...</span>
+      <span class="label">Статус:</span> <span id="status">Загрузка...</span>
     </div>
 
     <div class="info-box">
-      <span class="label">Uptime:</span> <span id="uptime">...</span>
+      <span class="label">Время работы:</span> <span id="uptime">...</span>
     </div>
 
     <div class="info-box">
-      <span class="label">Memória Usada:</span> <span id="memoria">...</span>
+      <span class="label">Используемая память:</span> <span id="memoria">...</span>
     </div>
 
     <div class="info-box">
-      <span class="label">Hospedagem:</span> <span id="regiao">...</span>
+      <span class="label">Хостинг:</span> <span id="regiao">...</span>
     </div>
 
     <div style="margin-top: 20px; font-size: 14px; color: #888;">
-      Atualizado há 2 minutos
+      Обновлено 2 минуты назад
     </div>
   </div>
 
