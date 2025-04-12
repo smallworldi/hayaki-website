@@ -1,16 +1,103 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <title>Bot Status</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+    body {
+      background: #0a0a0a;
+      color: white;
+      font-family: 'VT323', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url('static.gif'); /* opcional: fundo com estática */
+      background-size: cover;
+    }
+
+    .card {
+      background: #111;
+      padding: 30px;
+      border: 3px solid white;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 0 10px white;
+    }
+
+    .title {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #ff3e7f;
+    }
+
+    .info-box {
+      background: #1a1a1a;
+      border: 2px solid white;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .label {
+      color: #ccc;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+
+  <script>
+    async function carregarStatus() {
+      try {
+        const res = await fetch('https://hayaki-production.up.railway.app/botstatus');
+        const data = await res.json();
+
+        document.getElementById('status').innerText = data.status;
+        document.getElementById('uptime').innerText = data.uptime;
+        document.getElementById('memoria').innerText = data.memory;
+        document.getElementById('regiao').innerText = data.region;
+      } catch (err) {
+        console.error('Erro ao carregar status do bot:', err);
+      }
+    }
+
+    window.onload = carregarStatus;
+  </script>
+  
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
 
+  <div class="card">
+    <div class="title">HAYAKI BOT STATUS</div>
+
+    <div class="info-box">
+      <span class="label">Status:</span> <span id="status">Carregando...</span>
+    </div>
+
+    <div class="info-box">
+      <span class="label">Uptime:</span> <span id="uptime">...</span>
+    </div>
+
+    <div class="info-box">
+      <span class="label">Memória Usada:</span> <span id="memoria">...</span>
+    </div>
+
+    <div class="info-box">
+      <span class="label">Hospedagem:</span> <span id="regiao">...</span>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 14px; color: #888;">
+      Atualizado há 2 minutos
+    </div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="music/lofi.mp3" type="audio/mpeg">
+  </audio>
+
+</body>
 </html>
