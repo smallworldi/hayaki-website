@@ -68,7 +68,7 @@
     </div>
 
     <div class="info-box">
-      <span class="label">Хостинг:</span> <span id="host">...</span>
+      <span class="label">Хостинг:</span> <span id="region">...</span>
     </div>
 
     <div style="margin-top: 20px; font-size: 14px; color: #888;">
@@ -87,7 +87,7 @@
         document.getElementById('status').textContent = data.status;
         document.getElementById('uptime').textContent = formatUptime(data.uptime);
         document.getElementById('memory').textContent = data.memory;
-        document.getElementById('host').textContent = data.host;
+        document.getElementById('region').textContent = data.region;
       })
       .catch(err => {
         document.getElementById('status').textContent = 'Offline';
