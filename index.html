@@ -99,5 +99,27 @@
     <source src="music/lofi.mp3" type="audio/mpeg">
   </audio>
 
+<script>
+  fetch('https://hayaki-production.up.railway.app/botstatus')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('status').textContent = data.status;
+      document.getElementById('uptime').textContent = formatUptime(data.uptime);
+      document.getElementById('memory').textContent = data.memory;
+      document.getElementById('host').textContent = data.host;
+    })
+    .catch(err => {
+      document.getElementById('status').textContent = 'Offline';
+      console.error('Erro ao buscar status do bot:', err);
+    });
+
+  function formatUptime(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${hrs}h ${mins}m ${secs}s`;
+  }
+</script>
+
 </body>
 </html>
