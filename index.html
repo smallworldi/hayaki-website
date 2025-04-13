@@ -1,106 +1,140 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Статус Бота</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-    body {
-      background: #0a0a0a;
-      color: white;
-      font-family: 'VT323', monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-image: url('static.gif');
-      background-size: cover;
-    }
-
-    .card {
-      background: #111;
-      padding: 30px;
-      border: 3px solid white;
-      width: 350px;
-      text-align: center;
-      box-shadow: 0 0 10px white;
-    }
-
-    .title {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #ff3e7f;
-    }
-
-    .info-box {
-      background: #1a1a1a;
-      border: 2px solid white;
-      padding: 10px;
-      margin: 10px 0;
-    }
-
-    .label {
-      color: #ccc;
-    }
-
-    audio {
-      display: none;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hayaki - Информация о боте</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <div class="card">
-    <div class="title">СТАТУС БОТА HAYAKI</div>
-
-    <div class="info-box">
-      <span class="label">Статус:</span> <span id="status">Загрузка...</span>
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" data-tab="about">О боте</button>
+      <button class="tab" data-tab="status">Статус</button>
+      <button class="tab" data-tab="aboutme">Обо мне</button>
     </div>
 
-    <div class="info-box">
-      <span class="label">Время работы:</span> <span id="uptime">...</span>
+    <div class="tab-content active" id="about">
+      <div class="profile">
+        <img src="https://cdn.discordapp.com/avatars/1360489666779938847/dbeeebf204dda04a8cef69985997268c.png?size=2048" alt="Hayaki Bot" id="bot-avatar" />
+        <div class="profile-tooltip">
+          <p><strong>Hayaki</strong></p>
+          <p>Модератор-бот</p>
+          <p>Версия 1.4</p>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><strong>Название:</strong> Hayaki</div>
+        <div><strong>Владелица:</strong> @Smallworldii</div>
+        <div><strong>Язык:</strong> JavaScript</div>
+        <div><strong>Версия:</strong> 1.4</div>
+      </div>
     </div>
 
-    <div class="info-box">
-      <span class="label">Используемая память:</span> <span id="memory">...</span>
+    <div class="tab-content" id="status">
+      <div class="info-grid" id="status-info">
+        <div><strong>Статус:</strong> Загружается...</div>
+        <div><strong>Регион:</strong> Загружается...</div>
+        <div><strong>Память:</strong> Загружается...</div>
+        <div><strong>Время работы:</strong> Загружается...</div>
+      </div>
     </div>
 
-    <div class="info-box">
-      <span class="label">Хостинг:</span> <span id="region">...</span>
-    </div>
-
-    <div style="margin-top: 20px; font-size: 14px; color: #888;">
-      Обновлено 2 минуты назад
+    <div class="tab-content" id="aboutme">
+      <div class="about-text">
+        <p>Привет! Меня зовут <strong>Hayaki</strong>, я — бот для администрирования Discord-серверов. Моя основная задача — помогать модераторам управлять сообществом: от банов и мутов до автоматической защиты от спама и ссылок. Я создана для того, чтобы обеспечить порядок и безопасность в вашем сервере.</p>
+        <p>Если у тебя есть предложения по улучшению, не стесняйся обращаться к моей владелице — <strong>@Smallworldii</strong>.</p>
+      </div>
     </div>
   </div>
 
-  <audio autoplay loop>
-    <source src="music/lofi.mp3" type="audio/mpeg">
-  </audio>
+  <script src="script.js"></script>
+
+  <div class="language-selector">
+    <button id="langToggleBtn">Language</button>
+    <div id="langMenu" class="lang-menu hidden">
+      <button onclick="changeLang('ru')">🇷🇺 Русский</button>
+      <button onclick="changeLang('en')">🇬🇧 English</button>
+    </div>
+  </div>
 
   <script>
-    fetch('https://hayaki-production.up.railway.app/botstatus')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('status').textContent = data.status;
-        document.getElementById('uptime').textContent = formatUptime(data.uptime);
-        document.getElementById('memory').textContent = data.memory;
-        document.getElementById('region').textContent = data.region;
-      })
-      .catch(err => {
-        document.getElementById('status').textContent = 'Offline';
-        console.error('Ошибка при загрузке статуса бота:', err);
-      });
+    const langToggleBtn = document.getElementById('langToggleBtn');
+    const langMenu = document.getElementById('langMenu');
 
-    function formatUptime(seconds) {
-      const hrs = Math.floor(seconds / 3600);
-      const mins = Math.floor((seconds % 3600) / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${hrs}ч ${mins}м ${secs}с`;
+    langToggleBtn.addEventListener('click', () => {
+      langMenu.classList.toggle('hidden');
+    });
+
+    const texts = {
+      ru: {
+        tabAbout: "О боте",
+        tabStatus: "Статус",
+        tabAboutMe: "Обо мне",
+        name: "Название:",
+        owner: "Владелица:",
+        lang: "Язык:",
+        version: "Версия:",
+        status: "Статус:",
+        region: "Регион:",
+        memory: "Память:",
+        uptime: "Время работы:",
+        aboutText: `Привет! Меня зовут <strong>Hayaki</strong>, я — бот для администрирования Discord-серверов. Моя основная задача — помогать модераторам управлять сообществом: от банов и мутов до автоматической защиты от спама и ссылок. Я создана для того, чтобы обеспечить порядок и безопасность в вашем сервере.`,
+        aboutText2: `Если у тебя есть предложения по улучшению, не стесняйся обращаться к моей владелице — <strong>@Smallworldii</strong>.`
+      },
+      en: {
+        tabAbout: "About",
+        tabStatus: "Status",
+        tabAboutMe: "About Me",
+        name: "Name:",
+        owner: "Owner:",
+        lang: "Language:",
+        version: "Version:",
+        status: "Status:",
+        region: "Region:",
+        memory: "Memory:",
+        uptime: "Uptime:",
+        aboutText: `Hello! I'm <strong>Hayaki</strong>, a moderation bot designed for managing Discord communities. My primary role is to assist moderators in keeping things in order — from issuing bans and timeouts to protecting the server from spam and harmful links.`,
+        aboutText2: `If you have any suggestions for improvement, feel free to contact my owner — <strong>@Smallworldii</strong>.`
+      }
+    };
+
+    function setLanguage(lang) {
+      const t = texts[lang];
+      if (!t) return;
+
+      localStorage.setItem('siteLanguage', lang);
+
+      document.querySelector('[data-tab="about"]').textContent = t.tabAbout;
+      document.querySelector('[data-tab="status"]').textContent = t.tabStatus;
+      document.querySelector('[data-tab="aboutme"]').textContent = t.tabAboutMe;
+
+      const info = document.querySelectorAll('.info-grid div');
+      info[0].innerHTML = `<strong>${t.name}</strong> Hayaki`;
+      info[1].innerHTML = `<strong>${t.owner}</strong> @Smallworldii`;
+      info[2].innerHTML = `<strong>${t.lang}</strong> JavaScript`;
+      info[3].innerHTML = `<strong>${t.version}</strong> 1.4`;
+
+      const statusInfo = document.querySelectorAll('#status-info div');
+      statusInfo[0].innerHTML = `<strong>${t.status}</strong> Загружается...`;
+      statusInfo[1].innerHTML = `<strong>${t.region}</strong> Загружается...`;
+      statusInfo[2].innerHTML = `<strong>${t.memory}</strong> Загружается...`;
+      statusInfo[3].innerHTML = `<strong>${t.uptime}</strong> Загружается...`;
+
+      const aboutText = document.querySelector('#aboutme .about-text');
+      aboutText.innerHTML = `<p>${t.aboutText}</p><p>${t.aboutText2}</p>`;
+
+      langMenu.classList.add('hidden');
     }
-  </script>
 
+    function changeLang(lang) {
+      setLanguage(lang);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('siteLanguage') || 'ru';
+      setLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
