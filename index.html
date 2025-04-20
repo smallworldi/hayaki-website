@@ -1,4 +1,3 @@
-<!-- index.html (principal, com abas reduzidas) -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,8 +11,8 @@
     <div class="tabs">
       <button class="tab active" data-tab="about">О боте</button>
       <button class="tab" data-tab="status">Статус</button>
-      <a class="tab" href="/hayaki-website/terms">Термины</a>
-      <a class="tab" href="/hayaki-website/privacity">Приватность</a>
+      <button class="tab" data-tab="terms">Термины</button>
+      <button class="tab" data-tab="privacy">Приватность</button>
     </div>
 
     <div class="tab-content active" id="about">
@@ -45,6 +44,36 @@
         <div><strong>Время работы:</strong> Загружается...</div>
       </div>
     </div>
+
+    <div class="tab-content" id="terms">
+      <div class="about-text">
+        <h2 id="termsTitle"></h2>
+        <p id="termsText"></p>
+        
+        <h3 id="termsWarning"></h3>
+        <ul id="termsWarningList"></ul>
+
+        <h3 id="termsBugs"></h3>
+        <p id="termsBugsText"></p>
+
+        <p id="termsFooter"></p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="privacy">
+      <div class="about-text">
+        <h2 id="privacyTitle"></h2>
+        <p id="privacyText"></p>
+        
+        <h3 id="privacyDataTitle"></h3>
+        <ul id="privacyDataList"></ul>
+
+        <h3 id="privacyUsageTitle"></h3>
+        <p id="privacyUsageText"></p>
+
+        <p id="privacyFooter"></p>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
@@ -56,5 +85,144 @@
       <button onclick="changeLang('en')">🇬🇧 English</button>
     </div>
   </div>
+
+  <script>
+    const langToggleBtn = document.getElementById('langToggleBtn');
+    const langMenu = document.getElementById('langMenu');
+
+    langToggleBtn.addEventListener('click', () => {
+      langMenu.classList.toggle('hidden');
+    });
+
+    const texts = {
+      ru: {
+        tabAbout: "О боте",
+        tabStatus: "Статус",
+        tabTerms: "Термины",
+        tabPrivacy: "Приватность",
+        name: "Название:",
+        owner: "Владелица:",
+        lang: "Язык:",
+        version: "Версия:",
+        status: "Статус:",
+        region: "Регион:",
+        memory: "Память:",
+        uptime: "Время работы:",
+        aboutText: `Привет! Меня зовут <strong>Hayaki</strong>, я — бот для модерации и развлечений, созданный для управления сообществами на Discord. В данный момент я нахожусь в <strong>бета-версии</strong>, и мои функции всё ещё активно развиваются.`,
+        aboutText2: `<strong>⚠️ Любые попытки злоупотребления командами</strong> или эксплуатации приведут к <strong>постоянному бану</strong>.<br><br>Если вы обнаружили ошибку, пожалуйста, сообщите об этом моей владелице — <strong>@Smallworldii</strong>. Это поможет улучшить бота и ускорить развитие.`,
+        termsTitle: "Условия использования",
+        termsText: "Привет! Меня зовут Hayaki, я — бот для модерации и развлечений, созданный для управления сообществами на Discord. В данный момент я нахожусь в бета-версии, и мои функции всё ещё активно развиваются.",
+        termsWarning: "⚠️ Запрещённые действия",
+        termsWarningItems: ["Любая попытка злоупотребления командами или использования бота во вред — приведёт к постоянному бану.", "Использование бота в обход ограничений, автоматизация вызовов или спам команд строго запрещены."],
+        termsBugs: "🐞 Ошибки и обратная связь",
+        termsBugsText: "Если вы обнаружили ошибку или сбой в работе бота — пожалуйста, сообщите об этом моей владелице: @Smallworldii. Это поможет нам улучшить качество сервиса и быстрее выйти из стадии бета.",
+        termsFooter: "Используя бота, вы соглашаетесь с этими условиями. Благодарим за понимание и поддержку!",
+        privacyTitle: "Политика конфиденциальности",
+        privacyText: "Мы серьезно относимся к защите ваших данных. Эта политика объясняет, какую информацию мы собираем и как ее используем.",
+        privacyDataTitle: "📊 Собираемые данные",
+        privacyDataItems: [
+          "ID серверов Discord, где используется бот",
+          "Настройки и конфигурации для каждого сервера",
+          "Логи действий модерации для обеспечения безопасности"
+        ],
+        privacyUsageTitle: "🔒 Использование данных",
+        privacyUsageText: "Собранные данные используются исключительно для обеспечения работы бота и улучшения пользовательского опыта. Мы не передаем ваши данные третьим лицам.",
+        privacyFooter: "Если у вас есть вопросы о конфиденциальности, обратитесь к владельцу бота."
+      },
+      en: {
+        tabAbout: "About",
+        tabStatus: "Status",
+        tabTerms: "Terms",
+        tabPrivacy: "Privacy",
+        name: "Name:",
+        owner: "Owner:",
+        lang: "Language:",
+        version: "Version:",
+        status: "Status:",
+        region: "Region:",
+        memory: "Memory:",
+        uptime: "Uptime:",
+        aboutText: `Hello! I'm <strong>Hayaki</strong>, a moderation and entertainment bot designed to help manage Discord communities. I'm currently in <strong>beta</strong>, and my features are still under active development.`,
+        aboutText2: `<strong>⚠️ Any attempt to abuse commands</strong> or exploit the system will result in a <strong>permanent ban</strong>.<br><br>If you find any bugs, please report them to my owner — <strong>@Smallworldii</strong>. Your feedback helps improve the bot and accelerate development.`,
+        termsTitle: "Terms of Use",
+        termsText: `Hello! I'm Hayaki, a moderation and entertainment bot designed to help manage Discord communities. I'm currently in beta, and my features are still under active development.`,
+        termsWarning: "⚠️ Prohibited Actions",
+        termsWarningItems: ["Any attempt to abuse commands or exploit the bot will result in a permanent ban.", "Using the bot to bypass restrictions, automation of commands, or command spam are strictly prohibited."],
+        termsBugs: "🐞 Bugs and Feedback",
+        termsBugsText: "If you discover any bugs or issues while using the bot, please report them to my owner: @Smallworldii. This will help us improve service quality and move faster out of beta.",
+        termsFooter: "By using the bot, you agree to these terms. Thank you for your understanding and support!",
+        privacyTitle: "Privacy Policy",
+        privacyText: "We take your data protection seriously. This policy explains what information we collect and how we use it.",
+        privacyDataTitle: "📊 Data Collection",
+        privacyDataItems: [
+          "Discord server IDs where the bot is used",
+          "Settings and configurations for each server",
+          "Moderation action logs for security purposes"
+        ],
+        privacyUsageTitle: "🔒 Data Usage",
+        privacyUsageText: "The collected data is used solely for bot operation and improving user experience. We do not share your data with third parties.",
+        privacyFooter: "If you have any privacy concerns, please contact the bot owner."
+      }
+    };
+
+    function setLanguage(lang) {
+      const t = texts[lang];
+      if (!t) return;
+
+      localStorage.setItem('siteLanguage', lang);
+      document.getElementById('langToggleBtn').textContent = lang === 'en' ? 'Language' : 'Язык';
+
+      document.querySelector('[data-tab="about"]').textContent = t.tabAbout;
+      document.querySelector('[data-tab="status"]').textContent = t.tabStatus;
+      document.querySelector('[data-tab="terms"]').textContent = t.tabTerms;
+      document.querySelector('[data-tab="privacy"]').textContent = t.tabPrivacy;
+
+      const info = document.querySelectorAll('.info-grid div');
+      info[0].innerHTML = `<strong>${t.name}</strong> Hayaki`;
+      info[1].innerHTML = `<strong>${t.owner}</strong> @Smallworldii`;
+      info[2].innerHTML = `<strong>${t.lang}</strong> JavaScript`;
+      info[3].innerHTML = `<strong>${t.version}</strong> 1.4`;
+
+      const statusInfo = document.querySelectorAll('#status-info div');
+      statusInfo[0].innerHTML = `<strong>${t.status}</strong> Loading...`;
+      statusInfo[1].innerHTML = `<strong>${t.region}</strong> Loading...`;
+      statusInfo[2].innerHTML = `<strong>${t.memory}</strong> Loading...`;
+      statusInfo[3].innerHTML = `<strong>${t.uptime}</strong> Loading...`;
+
+      const aboutText = document.querySelector('#about-text');
+      aboutText.innerHTML = `<p>${t.aboutText}</p><p>${t.aboutText2}</p>`;
+
+      // Update terms section
+      document.getElementById('termsTitle').textContent = t.termsTitle;
+      document.getElementById('termsText').textContent = t.termsText;
+      document.getElementById('termsWarning').textContent = t.termsWarning;
+      const warningList = document.getElementById('termsWarningList');
+      warningList.innerHTML = t.termsWarningItems.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('termsBugs').textContent = t.termsBugs;
+      document.getElementById('termsBugsText').textContent = t.termsBugsText;
+      document.getElementById('termsFooter').textContent = t.termsFooter;
+
+      // Update privacy section
+      document.getElementById('privacyTitle').textContent = t.privacyTitle;
+      document.getElementById('privacyText').textContent = t.privacyText;
+      document.getElementById('privacyDataTitle').textContent = t.privacyDataTitle;
+      const privacyList = document.getElementById('privacyDataList');
+      privacyList.innerHTML = t.privacyDataItems.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('privacyUsageTitle').textContent = t.privacyUsageTitle;
+      document.getElementById('privacyUsageText').textContent = t.privacyUsageText;
+      document.getElementById('privacyFooter').textContent = t.privacyFooter;
+
+      langMenu.classList.add('hidden');
+    }
+
+    function changeLang(lang) {
+      setLanguage(lang);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('siteLanguage') || 'ru';
+      setLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
