@@ -26,6 +26,7 @@
       </div>
       <div class="info-grid">
         <div><strong>Название:</strong> Hayaki</div>
+        <div><strong>Discord Server:</strong> <a href="https://discord.gg/WbfBgyPcAF" style="color: white; text-decoration: none;">Click here to join</a></div>
         <div><strong>Владелица:</strong> @Smallworldii</div>
         <div><strong>Язык:</strong> JavaScript</div>
         <div><strong>Версия:</strong> 1.4</div>
@@ -108,6 +109,7 @@
         region: "Регион:",
         memory: "Память:",
         uptime: "Время работы:",
+        discordLink: "Присоединиться",
         aboutText: `Привет! Меня зовут <strong>Hayaki</strong>, я — бот для модерации и развлечений, созданный для управления сообществами на Discord. В данный момент я нахожусь в <strong>бета-версии</strong>, и мои функции всё ещё активно развиваются.`,
         aboutText2: `<strong>⚠️ Любые попытки злоупотребления командами</strong> или эксплуатации приведут к <strong>постоянному бану</strong>.<br><br>Если вы обнаружили ошибку, пожалуйста, сообщите об этом моей владелице — <strong>@Smallworldii</strong>. Это поможет улучшить бота и ускорить развитие.`,
         termsTitle: "Условия использования",
@@ -142,6 +144,7 @@
         region: "Region:",
         memory: "Memory:",
         uptime: "Uptime:",
+        discordLink: "Join server",
         aboutText: `Hello! I'm <strong>Hayaki</strong>, a moderation and entertainment bot designed to help manage Discord communities. I'm currently in <strong>beta</strong>, and my features are still under active development.`,
         aboutText2: `<strong>⚠️ Any attempt to abuse commands</strong> or exploit the system will result in a <strong>permanent ban</strong>.<br><br>If you find any bugs, please report them to my owner — <strong>@Smallworldii</strong>. Your feedback helps improve the bot and accelerate development.`,
         termsTitle: "Terms of Use",
@@ -179,8 +182,9 @@
 
       const info = document.querySelectorAll('.info-grid div');
       info[0].innerHTML = `<strong>${t.name}</strong> Hayaki`;
-      info[1].innerHTML = `<strong>${t.owner}</strong> @Smallworldii`;
-      info[2].innerHTML = `<strong>${t.lang}</strong> JavaScript`;
+      info[1].innerHTML = `<strong><a href="https://discord.gg/WbfBgyPcAF" style="color: white; text-decoration: none;">Discord Server</a></strong>`;
+      info[2].innerHTML = `<strong>${t.owner}</strong> @Smallworldii`;
+      info[3].innerHTML = `<strong>${t.lang}</strong> JavaScript`;
       info[3].innerHTML = `<strong>${t.version}</strong> 1.4`;
 
       const statusInfo = document.querySelectorAll('#status-info div');
