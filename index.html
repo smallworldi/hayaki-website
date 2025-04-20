@@ -11,7 +11,7 @@
     <div class="tabs">
       <button class="tab active" data-tab="about">О боте</button>
       <button class="tab" data-tab="status">Статус</button>
-      <button class="tab" data-tab="aboutme">Обо мне</button>
+      <button class="tab" data-tab="terms">Термины</button>
     </div>
 
     <div class="tab-content active" id="about">
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="tab-content" id="aboutme">
+    <div class="tab-content" id="terms">
       <div class="about-text">
         <p>Привет! Меня зовут <strong>Hayaki</strong>, я — бот для администрирования Discord-серверов. Моя основная задача — помогать модераторам управлять сообществом: от банов и мутов до автоматической защиты от спама и ссылок. Я создана для того, чтобы обеспечить порядок и безопасность в вашем сервере.</p>
         <p>Если у тебя есть предложения по улучшению, не стесняйся обращаться к моей владелице — <strong>@Smallworldii</strong>.</p>
@@ -70,7 +70,7 @@
       ru: {
         tabAbout: "О боте",
         tabStatus: "Статус",
-        tabAboutMe: "Обо мне",
+        tabTerms: "Термины",
         name: "Название:",
         owner: "Владелица:",
         lang: "Язык:",
@@ -85,7 +85,7 @@
       en: {
         tabAbout: "About",
         tabStatus: "Status",
-        tabAboutMe: "About Me",
+        tabTerms: "Terms",
         name: "Name:",
         owner: "Owner:",
         lang: "Language:",
@@ -107,7 +107,7 @@
 
       document.querySelector('[data-tab="about"]').textContent = t.tabAbout;
       document.querySelector('[data-tab="status"]').textContent = t.tabStatus;
-      document.querySelector('[data-tab="aboutme"]').textContent = t.tabAboutMe;
+      document.querySelector('[data-tab="terms"]').textContent = t.tabTerms;
 
       const info = document.querySelectorAll('.info-grid div');
       info[0].innerHTML = `<strong>${t.name}</strong> Hayaki`;
@@ -121,7 +121,7 @@
       statusInfo[2].innerHTML = `<strong>${t.memory}</strong> Загружается...`;
       statusInfo[3].innerHTML = `<strong>${t.uptime}</strong> Загружается...`;
 
-      const aboutText = document.querySelector('#aboutme .about-text');
+      const aboutText = document.querySelector('#terms .about-text');
       aboutText.innerHTML = `<p>${t.aboutText}</p><p>${t.aboutText2}</p>`;
 
       langMenu.classList.add('hidden');
